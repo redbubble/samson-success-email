@@ -1,0 +1,14 @@
+<fieldset>
+  <legend>Email on success</legend>
+
+  <% stage = form.object %>
+
+  <div class="col-lg-offset-2">
+    <div class="col-lg-2 checkbox">
+      <%= stage.label :send_success_email do %>
+        <%= stage.check_box :send_success_email %>
+        Send email to all committers on success
+      <% end %>
+    </div>
+  </div>
+</fieldset>
