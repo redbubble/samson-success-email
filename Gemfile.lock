@@ -1,0 +1,21 @@
+PATH
+  remote: .
+  specs:
+    samson_success_email (0.0.0)
+
+GEM
+  remote: https://rubygems.org/
+  specs:
+    minitest (5.9.0)
+    rake (11.1.2)
+
+PLATFORMS
+  ruby
+
+DEPENDENCIES
+  minitest (~> 5.9.0)
+  rake (~> 11.1.0)
+  samson_success_email!
+
+BUNDLED WITH
+   1.10.6
