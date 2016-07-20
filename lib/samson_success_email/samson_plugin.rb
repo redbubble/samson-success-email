@@ -1,5 +1,3 @@
-require 'faraday'
-
 module SamsonSuccessEmail
   class Engine < Rails::Engine
   end
@@ -15,10 +13,14 @@ Samson::Hooks.callback :stage_permitted_params do
   [:send_success_email]
 end
 
-# TODO: Something similar, but email, and only when it's successful.
-Samson::Hooks.callback :after_deploy do |deploy|
+Samson::Hooks.callback :after_deploy do |deploy, _|
+  Rails.logger.info "SuccessEmail after_deploy hook running - Deploy status #{deploy.status}, Send success email #{deploy.stage.send_success_email}."
   if deploy.succeeded? && deploy.stage.send_success_email
+    Rails.logger.info "Sending success email"
     committers = deploy.changeset.commits.map(&:author_email).uniq
     DeployMailer.deploy_success_email(deploy, committers)
+    Rails.logger.info "Success email sent to #{committers.join(',')}"
+  else
+    Rails.logger.info "Not sending success email."
   end
 end
